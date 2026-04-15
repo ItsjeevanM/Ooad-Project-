@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head><title>EduSphere API Test</title></head>
+<body>
+  <h2>Register</h2>
+  <button onclick="register()">Register Student</button>
+  <button onclick="login()">Login</button>
+  <button onclick="getCourses()">Get Courses</button>
+  <pre id="output"></pre>
+
+<script>
+  const BASE = "http://localhost:8080";
+  let token = "";
+
+  async function register() {
+    const res = await fetch(`${BASE}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: "student@test.com",
+        password: "password123",
+        fullName: "Test Student",
+        role: "STUDENT"
+      })
+    });
+    const data = await res.json();
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+  }
+
+  async function login() {
+    const res = await fetch(`${BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: "student@test.com",
+        password: "password123"
+      })
+    });
+    const data = await res.json();
+    token = data.token;
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+  }
+
+  async function getCourses() {
+    const res = await fetch(`${BASE}/api/student/courses`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+    const data = await res.json();
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+  }
+</script>
+</body>
+</html>
