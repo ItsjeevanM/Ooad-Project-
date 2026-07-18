@@ -18,6 +18,8 @@ A full-stack Learning Management System built with **Spring Boot** (backend) and
 - [Database Schema](#database-schema)
 - [Features](#features)
 - [Configuration](#configuration)
+- [Observability & Performance](#observability--performance)
+- [Screenshots](#screenshots)
 
 ---
 
@@ -126,7 +128,8 @@ Edit `src/main/resources/application.yml`:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/edusphere_lms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    # Change to your MySQL password
+    username: root          # Change to your MySQL username
+    password: jeeva         # Change to your MySQL password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -381,6 +384,46 @@ Update the API base URL if needed:
 ```javascript
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081/api/v1';
 ```
+
+---
+
+## Observability & Performance
+
+- Spring Boot Actuator is enabled for `/actuator/health`, `/actuator/info`, and `/actuator/metrics`.
+- API response time is captured by `RequestTimingFilter` and published as the `api.request.duration` metric.
+- Query-heavy tables now have indexes for courses, assignments, enrollments, submissions, attendance, marks, materials, and users.
+- The frontend includes a Lighthouse audit command: `npm run lighthouse` from `frontend/`.
+- Chrome DevTools can be used against the Vite app for network, performance, and rendering analysis.
+
+---
+
+## Screenshots
+
+Here are some screenshots from the project:
+
+![Login page](screenshots/screenshot_1.webp)
+
+![Student dashboard](screenshots/screenshot_2.webp)
+
+![Instructor dashboard](screenshots/screenshot_3.webp)
+
+![Course management](screenshots/screenshot_4.webp)
+
+![Assignment view](screenshots/screenshot_5.webp)
+
+![Attendance tracking](screenshots/screenshot_6.webp)
+
+![Materials upload](screenshots/screenshot_7.webp)
+
+![Grading interface](screenshots/screenshot_8.webp)
+
+![Marks overview](screenshots/screenshot_9.webp)
+
+![Additional view](screenshots/screenshot_10.webp)
+
+Lighthouse report:
+
+[frontend/lighthouse-report.html](frontend/lighthouse-report.html)
 
 ---
 
