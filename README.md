@@ -128,8 +128,8 @@ Edit `src/main/resources/application.yml`:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/edusphere_lms?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root          # Change to your MySQL username
-    password: jeeva         # Change to your MySQL password
+    username:       # Change to your MySQL username
+    password:        # Change to your MySQL password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
